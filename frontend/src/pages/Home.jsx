@@ -7,7 +7,7 @@ const Home = () => {
         <>
 <img src="../mnnit.png" alt=""  />
 
-<div className='sticky bg-sky-400 h-20 text-2xl flex flex-col z-20 justify-center font-bold  top-0 w-full pl-10 opacity-90'><h2 style={{marginLeft: 50 }}>Home</h2></div>
+<div className='page-title sticky bg-sky-400 h-20 text-2xl flex flex-col z-20 justify-center font-bold  top-0 w-full opacity-90'><h2 style={{marginLeft: 50 }}>Home</h2></div>
 
 <div className="notify bg-white text-black dark:text-white transition-backgroundColor duration-500 opacity-100 dark:bg-gray-700">
 
@@ -37,7 +37,7 @@ const Home = () => {
 
 
     <h3 className=''>ABOUT MNNIT</h3>
-    <p className="first-letter:text-3xl text-xl mt-40">
+    <p className="first-letter:text-3xl text-xl">
     Motilal Nehru National Institute Of Technology, Allahabad was formerly Motilal Nehru Regional Engineering College, Allahabad . It is an institute with total commitment to quality and excellence in academic pursuits, is among one of the leading institutes in INDIA and was established in year 1961 as a joint enterprise of Govt. of India and Govt. of U.P. in accordance with the scheme of establishment of REC. However with effect from June 26th of 2002 the college becam lorem100e deemed university and is now known as Motilal Nehru National Institute of technology.
     </p>
     <p className="text-xl mt-5">
@@ -55,7 +55,7 @@ const Home = () => {
     <p className="text-xl mt-5">
       MNNIT is a fully residential institution with eight hostels for boys and two for girls.
     </p>
-    <hr className="w-full mt-10" />
+    <hr className="w-full mt-10 mb-5" />
   </div>
 </div>
 

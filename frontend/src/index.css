@@ -5,9 +5,17 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+body::-webkit-scrollbar{
+    background: rgb(0, 136, 255);
+    width: 7px;
+}
 
 
-*{
-    margin: 0;padding: 0;
-    box-sizing: border-box;
+body::-webkit-scrollbar-thumb{
+    background: rgb(5, 52, 93);
+}
+
+body,html{
+    height: 100%;
+    width: 100%;
 }

@@ -23,14 +23,14 @@ const Navbar = () => {
   return (
     <>
         
-<nav className="container w-full min-w-full h-40 pt-5 flex dark:bg-slate-800 transition-backgroundColor duration-500 opacity-100">
+<nav className="container w-full min-w-full h-44 pt-5 flex dark:bg-slate-800 transition-backgroundColor duration-500 opacity-100">
        <div className="mnnitLogo h-32 w-96 z-10 relative "> <a href="#"><img src="https://academics.mnnit.ac.in/static/img/MNNIT-2.png" alt="mnnit_logo" title='MNNIT'/></a></div>
        <div className="mnnit text-base w-full " >
         <div className="mnnitName flex flex-col text-center justify-evenly h-full w-full  relative box-border"><h1 className='text-4xl ml-28'>MOTILAL NEHRU NATIONAL INSTITUTE OF TECHNOLOGY ALLAHABAD</h1>
             <h4>Office of The Dean(Academics) | <span className='text-black dark:text-white transition-backgroundColor duration-500 opacity-100'>
             Email: academics@mnnit.ac.in</span></h4>
             <div className='flex w-full h-14 z-10 relative box-border'>
-                        <div className="list h-full absolute right-0 bottom-0 box-border">
+                        <div className="list h-full absolute  right-0 bottom-0 box-border">
                             <ul className='h-full list-none flex justify-end box-border'>
                                 <li className='flex'> <Link to="/" className='w-full py-4'>Home</Link> </li>
                                 <li className='flex'><Link to ='/calender' className='w-full py-4'>Academic Calender</Link></li>

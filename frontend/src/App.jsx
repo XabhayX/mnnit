@@ -8,7 +8,8 @@ import { UserContext } from './hooks/UserContext.js'
 import Layout from './components/Layout/Layout.jsx'
 import Home from './pages/Home.jsx'
 import smoothScroll from './utility/smoothScroll.js'
-
+import Calender from './pages/Calender.jsx'
+import Login from './pages/Login.jsx'
 
 
 
@@ -28,8 +29,27 @@ const router = createBrowserRouter([
   children: [
     {index: true,
     element: <Home/>
-    },
-    
+    }, 
+  ]
+}
+, 
+{
+  path:'calender',
+  element: <Layout/>,
+  children: [
+    {index: true,
+    element: <Calender/>
+    }, 
+  ]
+}, 
+{
+  path: 'login',
+  element: <Layout/>,
+  children: [
+    {
+      index: true, 
+      element: <Login/>
+    }
   ]
 }
 
@@ -44,8 +64,13 @@ const router = createBrowserRouter([
 //   )
 // }
 
+
+
+
+
 const App = () => {
 
+  
   useEffect(() => {
     smoothScroll()
   }, [])
