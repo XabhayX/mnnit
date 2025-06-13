@@ -1,0 +1,80 @@
+
+.notify{
+    display: grid; 
+    grid-template-columns: 1.2fr 2fr;
+    /* height: fit-content; */
+    /* height: 500px; */
+    padding-top: 50px;
+    }
+
+
+    .notify h3{
+    color:#3DB7EF;
+    font-size: 20px;
+    position: relative;
+    font-weight: bolder;
+    box-sizing: content-box;
+margin-bottom: 30px;
+    }
+
+    .notify h3::after{
+    position: absolute;
+    /* left: 0; */
+    content: '';
+    bottom: -10px;
+    left: 0;
+    width: 80px; 
+    height: 4px; 
+    background-color: black; 
+    border-radius:3px;
+    /* margin-bottom: 10px; */
+    }
+    .notifications{ 
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    /* background-color: rebeccapurple; */
+    }
+    .aboutMnnit{
+    display: flex;
+    /* background-color: rebeccapurple; */
+    flex-direction: column;
+    }
+
+
+
+
+
+
+    .notifications ul{
+    position: relative;
+    /* background-color: rebeccapurple; */
+    list-style: none;
+    top: 50px;
+    }
+    
+    .notifications ul li{
+    background-color: #F5F5F5;
+    /* background-color: rebeccapurple; */
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    }
+    .notificationContent{
+    width:60%;
+    /* background-color: rebeccapurple; */
+
+    }
+    .notificationDate, .notificationOpen{
+    color: #B22D00;
+    font-weight:500;
+    }
+
+
+    .admin{
+        display: none;
+    }

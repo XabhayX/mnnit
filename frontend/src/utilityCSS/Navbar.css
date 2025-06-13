@@ -1,0 +1,91 @@
+
+.mnnitLogo {
+background-color: #3DB7EF;
+-webkit-user-drag: none;
+user-select: none;
+}
+
+.mnnitLogo::before {
+content: '';
+position: absolute;
+top: 0;
+right:0;
+width: 120%;
+height: 100%;
+background-color: #3DB7EF;
+transform: skewX(-35deg);
+transform-origin:bottom right;
+z-index: -1;
+box-shadow: 10px 10px 10px rgb(120, 120, 120);
+}
+
+
+.mnnit{
+font-weight: bolder;
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color: #3DB7EF;
+padding-left: 30px;
+}
+
+
+.list{
+width: 90%;
+background-color: #152648;
+}
+
+
+
+.list ul{
+    overflow: hidden;
+}
+
+.list ul::before {
+content: '';
+position: absolute;
+top: 0;
+
+width: 50%;
+height: 100%;
+background-color: #152648;
+/* background: red; */
+transform: skewX(-35deg);
+left:-55px;
+z-index: -1;
+}
+
+
+.list ul li{
+color:white; 
+border-right: 1px solid white;
+border-radius: 0px 1px 1px 0px;
+height: 100%;
+/* width: 13%; */
+min-width: 15%;
+justify-content:center;
+align-items: center;
+/* margin: auto 0; */
+position: relative;
+}
+
+.list ul li::after{
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 100%;
+    /* z-index: 1; */
+     bottom: -100%;
+     background: linear-gradient(to top,  white, transparent);
+     opacity: .6;
+     transition: all 300ms;
+}
+
+
+.list ul li:hover::after{
+    bottom:0%;
+}
+
+.list ul li:hover{
+    text-shadow: 2px 4px 1px black;
+}
