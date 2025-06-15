@@ -10,6 +10,13 @@ import Home from './pages/Home.jsx'
 import smoothScroll from './utility/smoothScroll.js'
 import Calender from './pages/Calender.jsx'
 import Login from './pages/Login.jsx'
+import AdminPanel from './pages/AdminPanel.jsx'
+import AdminRoute from './routes/AdminRoute/adminRoute.jsx'
+import Card from './components/Card/Card.jsx'
+import Resources from './pages/Resources.jsx'
+import Sidebar from './components/Sidebar/Sidebar.jsx'
+import Profile from './pages/Profile.jsx'
+import SideLayout from './components/Layout/SideLayout.jsx'
 
 
 
@@ -51,6 +58,39 @@ const router = createBrowserRouter([
       element: <Login/>
     }
   ]
+}, 
+{ 
+  path: 'admin', 
+  element:<>
+  <AdminRoute>
+    <Navbar/>
+    <AdminPanel/>
+  </AdminRoute>
+  </> 
+}, 
+{
+  path:'resources',
+  element: <Layout/>,
+   children: [
+    {
+    element: <SideLayout/>, 
+    children: [{
+      index: true,                     //index: true, removes the need of explicitly providing the path for the render of the child
+      element: <Resources/>}]
+    }, 
+  ]
+},
+{
+  path:'profile',
+  element: <Layout/>,
+  children: [
+    {
+    element: <SideLayout/>, 
+    children: [{
+      index: true,                     //index: true, removes the need of explicitly providing the path for the render of the child
+      element: <Profile/>}]
+    }, 
+  ]
 }
 
 ])
@@ -76,12 +116,16 @@ const App = () => {
   }, [])
   
 
-const use = {
+const guestUser = {
   name: "Guest", 
-  class: "No Class"
+  class: "No Class", 
+  role: "Student"
 }
 
-const [user, setUser] = useState(use)
+const [user, setUser] = useState(guestUser)
+
+
+
 //  console.log(user)
   return (  
   // <div id="smooth-wrapper">

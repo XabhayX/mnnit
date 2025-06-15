@@ -5,20 +5,34 @@ import { Link } from 'react-router-dom'
 import {toggleDarkMode} from '../../utility/toggleDarkMode.js'
 import { UserContext } from '../../hooks/UserContext.js'
 
-const Navbar = () => {
+const Navbar = ()  => {
 
     const {user, setUser} = useContext(UserContext);
+    console.log(user)
     
     const currentUser = {
-        name: "user", 
-        class:"12"
+        name: "abhay", 
+        class:"12", 
+        role: "admin"
     }
 
-    useEffect(() => {
+    
+const guestUser = {
+  name: "Guest", 
+  class: "No Class", 
+  role: "Student"
+}
+
+    function setAdmin(){
+      if(user.name === "abhay") setUser(guestUser)
+      else(setUser(currentUser))
+    }
+
+    // useEffect(() => {
       
-    setUser(currentUser)
+    //   setUser(currentUser)
      
-    }, [])
+    // }, [])
     
   return (
     <>
@@ -34,6 +48,7 @@ const Navbar = () => {
                             <ul className='h-full list-none flex justify-end box-border'>
                                 <li className='flex'> <Link to="/" className='w-full py-4'>Home</Link> </li>
                                 <li className='flex'><Link to ='/calender' className='w-full py-4'>Academic Calender</Link></li>
+                                <li className='flex'><Link to ='/admin' className='w-full py-4'>Admin Panel</Link></li>
                                 <li
                                     onClick={toggleDarkMode}
                                     className="flex py-4 text-white rounded cursor-pointer"
@@ -48,6 +63,14 @@ const Navbar = () => {
   {user.name.toUpperCase()}
   </Link>}
 </li>
+   <li
+                                    onClick={()=>{setAdmin()}}
+                                    className="flex py-4 text-white rounded cursor-pointer"
+                                    role="button"
+                                    tabIndex="0">
+                                    Switch to Admin
+                                </li>
+
                             </ul>
                         </div>
             </div>
