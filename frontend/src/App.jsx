@@ -17,6 +17,8 @@ import Resources from './pages/Resources.jsx'
 import Sidebar from './components/Sidebar/Sidebar.jsx'
 import Profile from './pages/Profile.jsx'
 import SideLayout from './components/Layout/SideLayout.jsx'
+import BranchResource from './pages/BranchResouces.jsx'
+import ResourceTable from './components/ResourceTable/ResourceTable.jsx'
 
 
 
@@ -78,6 +80,22 @@ const router = createBrowserRouter([
       index: true,                     //index: true, removes the need of explicitly providing the path for the render of the child
       element: <Resources/>}]
     }, 
+    {
+      path: ':branchParam', 
+      element: <BranchResource/>, 
+      children: [
+        {
+          path: ':subjectParam',
+          // index: true,
+          element: <ResourceTable/> , 
+    }
+      ]
+    }, 
+    // {
+    //   path:':branchParam/:subjectParam', 
+    //   element: <ResourceTable/>
+    // }
+    
   ]
 },
 {
@@ -91,7 +109,9 @@ const router = createBrowserRouter([
       element: <Profile/>}]
     }, 
   ]
-}
+}, 
+
+
 
 ])
 

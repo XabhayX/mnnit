@@ -49,6 +49,7 @@ const guestUser = {
                                 <li className='flex'> <Link to="/" className='w-full py-4'>Home</Link> </li>
                                 <li className='flex'><Link to ='/calender' className='w-full py-4'>Academic Calender</Link></li>
                                 <li className='flex'><Link to ='/admin' className='w-full py-4'>Admin Panel</Link></li>
+                                <li className='flex'><Link to ='/resources' className='w-full py-4'>Resources</Link></li>
                                 <li
                                     onClick={toggleDarkMode}
                                     className="flex py-4 text-white rounded cursor-pointer"

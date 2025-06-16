@@ -4,7 +4,7 @@ function Resources(){
 
  const Departments = [
     {
-      id:1 , name: 'Civil Engineering', description: 'Civil Engineering is the most evergreen branch. Consists of the most talented students of MNNIT.'
+      id:1 , name: 'civil-engineering', description: 'Civil Engineering is the most evergreen branch. Consists of the most talented students of MNNIT.'
     }, 
     { 
       id:2,   name: 'Mechanical Engineering' , description: 'Mechanical Engineering is the most evergreen branch. Consists of the most talented students of MNNIT.'
