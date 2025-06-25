@@ -1,17 +1,37 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { DB } from '../../FakeDB/FakeDB';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
+
+
 
 const ResourceTable = () => {
+
+  const [topics, setTopics] = useState([])
+
   const { branchParam, subjectParam } = useParams();
-  // console.log(subjectParam, branchParam)
+  // console.log(branchParam, subjectParam)
+  useEffect(() => {
+    
+    console.log(branchParam, subjectParam);
 
-  let subject; 
-  DB.subjects.forEach((subjectFE)=>{
-    // console.log(subjectFE)
-    if(subjectParam == subjectFE.id) {subject = subjectFE; console.log(subject)}
-  } )
+    const getTopics = async()=>{
+      let gatheredTopics = await axios.post('/api/get-topics-list', {branchParam : branchParam, subjectParam: subjectParam})
+      // const topics = gatheredTopics.data; 
+      // setTopics((topics)=>{ topics = gatheredTopics.data});
+      setTopics(gatheredTopics.data)
+      // console.log(typeof gatheredTopics)
+      // console.log(gatheredTopics.data)
+      // console.log(topics)
+    }
 
+  getTopics();
+
+}, [subjectParam]);
+
+  
 
   return (
       <div data-lenis-prevent className='h-96 my-5 overflow-auto shadow-md sm:rounded-lg'>
@@ -28,7 +48,7 @@ const ResourceTable = () => {
         </tr>
       </thead>
       <tbody>
-        {subject.topics.map((item, index) => (
+        {topics.map((item, index) => (
           <tr
             key={index}
             className='bg-gray-100 dark:bg-gray-800 border-b dark:border-gray-500 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 transition-backgroundColor duration-500'
@@ -38,7 +58,8 @@ const ResourceTable = () => {
               className='px-6 py-4 font-semibold text-gray-900 whitespace-nowrap dark:text-gray-100'
             >
               <a
-                href='https://google.com'
+                href =  {item.topicUrl}
+                target="_"
                 className='text-blue-500 dark:text-blue-400 font-semibold'
               >
                 {item.title}

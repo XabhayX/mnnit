@@ -15,9 +15,9 @@ const Card = ({department}) => {
 
   {/* Title */}
   <div className="text-center pt-3 mb-5">
-    <Link to={department.name}>
+    <Link to={department.id}>
       <p className="font-semibold text-black dark:text-gray-100">
-        {department.name}
+        {department.branchName}
       </p>
     </Link>
   </div>
