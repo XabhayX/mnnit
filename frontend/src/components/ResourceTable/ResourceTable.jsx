@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { DB } from '../../FakeDB/FakeDB';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useState } from 'react';
@@ -18,7 +17,7 @@ const ResourceTable = () => {
     console.log(branchParam, subjectParam);
 
     const getTopics = async()=>{
-      let gatheredTopics = await axios.post('/api/get-topics-list', {branchParam : branchParam, subjectParam: subjectParam})
+      let gatheredTopics = await axios.post('/api/resources/get-topics-list', {branchParam : branchParam, subjectParam: subjectParam})
       // const topics = gatheredTopics.data; 
       // setTopics((topics)=>{ topics = gatheredTopics.data});
       setTopics(gatheredTopics.data)

@@ -21,7 +21,7 @@ const Login = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/v1/users/log', loginFormData);
+      const response = await axios.post('/api/users/login', loginFormData);
       console.log("Login Data received:", response.data);
 
     console.log(response.data)

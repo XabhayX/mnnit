@@ -13,7 +13,7 @@ function Resources() {
   useEffect(() => {
     
     const getDepartments = async ()=>{
-    const gatheredDepartments = await axios.post('/api/get-departments');
+    const gatheredDepartments = await axios.post('/api/resources/get-departments');
     setDepartments(gatheredDepartments.data)
   } 
   getDepartments()
@@ -62,7 +62,7 @@ function Resources() {
     });
   
 
- await axios.post('http://localhost:4000/api/create-department', formData).then(()=>{console.log("Form Data posted via Axios"); toggleModal()}).catch((err)=>{"Err posting data via Axios. Err: ", err})
+ await axios.post('/api/resources/create-department', formData).then(()=>{console.log("Form Data posted via Axios"); toggleModal()}).catch((err)=>{"Err posting data via Axios. Err: ", err})
 
 };
 

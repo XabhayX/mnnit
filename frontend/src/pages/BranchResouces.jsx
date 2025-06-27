@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, Outlet, useParams } from 'react-router-dom';
-import ResourceTable from '../components/ResourceTable/ResourceTable';
-import { DB } from '../FakeDB/FakeDB';
 import axios from 'axios';
 import { UserContext } from '../hooks/UserContext';
 
@@ -11,12 +9,6 @@ const BranchResource = () => {
   const [selectedSubject, setSelectedSubject] = useState('');
   const { branchParam } = useParams();
 
-  const tempBranch = {
-    branchName: '',
-    subjects: [
-      { id: '', title: '' }
-    ],
-  };
 
   let departmentId = branchParam;
   const [subjects, getSubjects] = useState([]);
@@ -24,7 +16,7 @@ const BranchResource = () => {
   useEffect(() => {
     async function send() {
       try {
-        const gatheredSubjects = await axios.post('/api/get-subjects', { departmentId });
+        const gatheredSubjects = await axios.post('/api/resources/get-subjects', { departmentId });
         getSubjects(gatheredSubjects.data);
         // console.log(gatheredSubjects.data);
       } catch (error) {
@@ -55,7 +47,7 @@ const BranchResource = () => {
       return alert('Subject title and id required.');
 
     const uploadSubjects = async () => {
-      if (!branch) {
+      if (!departmentId) {
         console.log('Incomplete Parameters');
         console.alert("Incomplete Parameters")
       } else {
@@ -68,7 +60,7 @@ const BranchResource = () => {
         const newformData = { ...formData, departmentId: departmentId };
         console.log(newformData, ' is submitted.');
 
-        await axios.post('/api/create-subjects', newformData).then(() => {
+        await axios.post('/api/resources/create-subjects', newformData).then(() => {
           document.querySelector('[name="subjectName"]').value = '';
           document.querySelector('[name="subjectID"]').value = '';
         });
@@ -120,7 +112,7 @@ const handleUploadSubmit = async (e) => {
 
 
   // Optional: Upload logic
-  await axios.post('/api/get-topics', formData, 
+  await axios.post('/api/resources/create-topics', formData, 
          { headers: {
         'Content-Type': 'multipart/form-data'
       }}
