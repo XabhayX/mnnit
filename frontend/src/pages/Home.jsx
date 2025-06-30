@@ -1,8 +1,28 @@
-import React from 'react'
+import axios from 'axios'
 import '../utilityCSS/Home.css'
-import { NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { getNotification } from '../../../backend/src/controllers/notification.controller'
+import { useState } from 'react'
 
 const Home = () => {
+
+  const [notifications, setNotifications] = useState([{}])
+
+useEffect(() => {
+  const getNotifications = async ()=>{
+  try {
+    const notificationData = await axios.post('/api/notifications/get-notification');
+    console.log(notificationData)
+    setNotifications(notificationData.data)
+  } catch (error) {
+    console.log(error)
+  }
+  }
+  getNotifications();
+}, [])
+
+
+
   return (
         <>
 <img src="../mnnit.png" alt=""  />
@@ -15,21 +35,29 @@ const Home = () => {
 
 
     <h3 className='mb-10'>NOTIFICATIONS</h3>
-    {/* <div className="notification"> */}
-      {/* <ul> */}
+    <div className="notification">
+      <ul>
         
-        {/* {jokes.map((joke, index) => (
-          <li key={index} className=' text-black dark:text-dark rounded-md'>
-            <div className="notificationContent">{joke}</div>
-            <div className="notificationDate">{addNotificationTime.getDate()}/{addNotificationTime.getMonth()}/{addNotificationTime.getFullYear()%100}</div>
-            <div className="notificationOpen"> + </div>
-          </li>
-        ))} */}
+{notifications.map((notification) => {
+  const date = notification.updatedAt
+    ? notification.updatedAt.split("T")[0]
+    : "Unknown Date";
+
+  return (
+    <li key={notification._id || 0} className="text-black dark:bg-gray-700 dark:text-black rounded-md">
+      <div className="notificationContent">{notification.content}</div>
+      <div className="notificationDate text-sm text-gray-500">{date}</div>
+    </li>
+  );
+})}
+
 
         
-      {/* </ul> */}
+      </ul>
   
-    {/* </div> */}
+    </div>
+
+
   </div>
 
   <div className="aboutMnnit ">

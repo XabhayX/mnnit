@@ -13,7 +13,7 @@ const TopicSchema = new mongoose.Schema({
     }, 
     uploadedBy:{
         // type: mongoose.Schema.Types.ObjectId,
-        // ref: 'User'
+        // ref: 'User',
         type: String
     }, 
     subject:{

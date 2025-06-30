@@ -1,8 +1,3 @@
-import React from 'react'
-// import '../utility/Profile.css'
-// import { useUserContext } from '../userContext.jsx';
-import { useEffect } from 'react';
-
 const Profile = () => {
 
 //   const {  currentUser, setCurrentUser,  userLogStatus, setUserLogStatus, login, logout} = useUserContext(null); 

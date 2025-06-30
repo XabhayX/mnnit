@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../../hooks/UserContext';
+import { Navigate } from 'react-router-dom';
 
 const AuthRoute = ({children}) => {
 
@@ -7,22 +8,9 @@ const AuthRoute = ({children}) => {
 
         const {user, setUser} = useContext(UserContext);
         
-        const currentUser = {
-            name: "abhay", 
-            class:"12", 
-            role: "admin"
-        }
-    
-        useEffect(() => {
-          
-          setUser(currentUser)
-         
-        }, [])
+        if(user.role == "student" || user.role == "admin" || user.role == "staff" || user.role == "tester") return (children)
 
-
-  return (
-    children
-  )
+        return (<Navigate to="/" replace />)
 }
 
 export default AuthRoute

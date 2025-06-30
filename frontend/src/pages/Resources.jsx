@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Plus, X, UploadCloud } from 'lucide-react';
 import Card from '../components/Card/Card.jsx';
 import axios from 'axios'
+import {UserContext} from '../hooks/UserContext.js'
+import { useContext } from 'react';
 
 
 function Resources() {
@@ -11,14 +13,14 @@ function Resources() {
   ]);
 
   useEffect(() => {
-    
-    const getDepartments = async ()=>{
-    const gatheredDepartments = await axios.post('/api/resources/get-departments');
-    setDepartments(gatheredDepartments.data)
-  } 
-  getDepartments()
+
+    const getDepartments = async () => {
+      const gatheredDepartments = await axios.post('/api/resources/get-departments');
+      setDepartments(gatheredDepartments.data)
+    }
+    getDepartments()
   }, [])
-  
+
 
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
@@ -48,31 +50,33 @@ function Resources() {
       return;
     }
 
-  const formEntryData = new FormData(e.target);
-  const formData = {}
-  for (let [key, value] of formEntryData.entries() ) {
-    formData[key] = value ; 
-  }
+    const formEntryData = new FormData(e.target);
+    const formData = {}
+    for (let [key, value] of formEntryData.entries()) {
+      formData[key] = value;
+    }
 
-   setForm({
+    setForm({
       id: '',
       branchName: '',
       description: '',
       image: defaultAvatar
     });
-  
-
- await axios.post('/api/resources/create-department', formData).then(()=>{console.log("Form Data posted via Axios"); toggleModal()}).catch((err)=>{"Err posting data via Axios. Err: ", err})
-
-};
 
 
-  const handleChange = (e)=>{
-    const {name, value} = e.target; 
-    setForm( (prev) => ({
-      ...prev, [name] : value,
-    }) )
+    await axios.post('/api/resources/create-department', formData).then(() => { console.log("Form Data posted via Axios"); toggleModal() }).catch((err) => { "Err posting data via Axios. Err: ", err })
+
+  };
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev, [name]: value,
+    }))
   }
+
+  const {user, setUser} = useContext(UserContext);
 
   return (
     <div className='w-full col-span-3'>
@@ -82,7 +86,7 @@ function Resources() {
         ))}
 
         {/* Add Department Card */}
-        <div
+        {(user.role == "admin") && (<div
           onClick={toggleModal}
           className="max-w-xs w-full mt-14 p-0 border border-dashed border-gray-400 dark:border-gray-300 bg-gray-100 dark:bg-slate-600 rounded-lg transition-all duration-200 ease-in-out transform hover:shadow-[5px_5px_10px_rgb(103,103,103)] hover:dark:shadow-[5px_5px_10px_rgb(180,180,180)] hover:-translate-y-1 cursor-pointer overflow-hidden flex flex-col items-center justify-center h-64"
         >
@@ -90,25 +94,26 @@ function Resources() {
           <span className="text-lg font-semibold text-gray-700 dark:text-gray-100">
             Add Department
           </span>
-        </div>
+        </div> )}
+
       </div>
 
       {/* Modal */}
-      {isOpen && (
+      {isOpen && (user.role == "admin") && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-lg w-full relative">
             <button onClick={toggleModal} className="absolute top-4 right-4">
               <X className="text-gray-600 dark:text-gray-200" />
             </button>
             <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Add New Department</h2>
-            <form 
-            onSubmit={handleSubmit}
-            // onSubmit={(e)=>{
-            //   console.log(e, "\n")
-            //   console.log("Hello There")
-            // }}
+            <form
+              onSubmit={handleSubmit}
+              // onSubmit={(e)=>{
+              //   console.log(e, "\n")
+              //   console.log("Hello There")
+              // }}
 
-             className="space-y-4">
+              className="space-y-4">
               <input
                 name="id"
                 placeholder="ID* (Format: civil-engineering)"
@@ -148,7 +153,7 @@ function Resources() {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    // onChange={handleImageChange}
+                  // onChange={handleImageChange}
                   />
                 </label>
               </div>

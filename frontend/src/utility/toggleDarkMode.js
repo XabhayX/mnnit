@@ -1,10 +1,24 @@
+import toast from 'react-hot-toast';
+
 const toggleDarkMode = () => {
+  document.querySelector('html').classList.toggle('dark');
 
-document.querySelector('html').classList.toggle('dark')
+  const isDark = document.querySelector('html').classList.contains('dark');
 
-//   return (
-//     <></>
-//   )
-}
+  const toastId = 'theme-toast';
 
-export {toggleDarkMode}
+  toast.dismiss(toastId); 
+
+  toast(isDark ? 'Hello Darkness!' : 'Back to Light!', {
+    id: toastId, 
+    icon: isDark ? '🌙' : '☀️',
+    style: {
+      borderRadius: '10px',
+      background: isDark ? '#fff' : '#000',
+      color: isDark ? '#000' : '#fff',
+    },
+  });
+
+};
+
+export { toggleDarkMode };

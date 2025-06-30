@@ -9,14 +9,15 @@ const Navbar = ()  => {
 
     const {user, setUser} = useContext(UserContext);
     console.log(user)
+   
     
+
+
     const currentUser = {
         name: "abhay", 
         class:"12", 
         role: "admin"
     }
-
-    
 const guestUser = {
   name: "Guest", 
   class: "No Class", 
@@ -27,12 +28,6 @@ const guestUser = {
       if(user.name === "abhay") setUser(guestUser)
       else(setUser(currentUser))
     }
-
-    // useEffect(() => {
-      
-    //   setUser(currentUser)
-     
-    // }, [])
     
   return (
     <>
@@ -48,14 +43,18 @@ const guestUser = {
                             <ul className='h-full list-none flex justify-end box-border'>
                                 <li className='flex'> <Link to="/" className='w-full py-4'>Home</Link> </li>
                                 <li className='flex'><Link to ='/calender' className='w-full py-4'>Academic Calender</Link></li>
+                                { user.role == "admin" &&
                                 <li className='flex'><Link to ='/admin' className='w-full py-4'>Admin Panel</Link></li>
-                                <li className='flex'><Link to ='/resources' className='w-full py-4'>Resources</Link></li>
+                                }
+
+                        
                                 <li
                                     onClick={toggleDarkMode}
                                     className="flex py-4 text-white rounded cursor-pointer"
                                     role="button"
                                     tabIndex="0">
                                     Dark Mode
+                                    
                                 </li>
 
                                   <li className="flex">

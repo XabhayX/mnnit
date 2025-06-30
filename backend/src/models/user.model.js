@@ -2,14 +2,14 @@ import mongoose, {Schema} from "mongoose";
 
 const userSchema = new Schema(
     {
-        userName: {
-            type: String, 
-            required: true, 
-            unique: true, 
-            lowercase: true, 
-            trim: true, 
-            index: true         // searchable
-        },
+        // userName: {
+        //     type: String, 
+        //     // required: true, 
+        //     // unique: true, 
+        //     lowercase: true, 
+        //     // trim: true, 
+        //     // index: true         // searchable
+        // },
         email: {
             type: String, 
             required: true, 
@@ -38,9 +38,16 @@ const userSchema = new Schema(
         }, 
         role: { 
             type: String, 
-            enum: ["student", "staff", "admin"], 
+            enum: ["student", "staff", "admin", "guest"], 
             required: true
-        }
+        }, 
+        contributions: [{
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: "Topic"
+        }]
+    }, 
+    {
+        timestamps: true
     }
 )
 
