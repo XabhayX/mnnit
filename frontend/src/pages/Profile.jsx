@@ -1,21 +1,10 @@
+import { useContext } from "react"
+import { UserContext } from "../hooks/UserContext.js"
+
 const Profile = () => {
 
-//   const {  currentUser, setCurrentUser,  userLogStatus, setUserLogStatus, login, logout} = useUserContext(null); 
+const {user, setUser} = useContext(UserContext)
 
-
-
-  // useEffect(() => {
-  //   const storedUser = JSON.parse(localStorage.getItem("allAboutUser"));
-  //   if (storedUser) {
-  //     console.log(storedUser, "Loaded user from local storage");
-  //     setCurrentUser(storedUser);
-  //   }
-  // }, [setCurrentUser]);
-
-const UserDetails= {
-    name:  "Guest", 
-    email:  "email"
-}
 
   return (
     <>
@@ -40,21 +29,21 @@ const UserDetails= {
               type="text"
               id="regno"
               name="regno"
-              value={UserDetails?.name}
+              value={user?.name}
               readOnly
               className="border rounded p-2 w-full ml-5 text-black dark:bg-gray-900 dark:text-gray-100"
             />
           </div>
 
           <div className="mb-5">
-            <label htmlFor="email" className="block mb-1 font-bold dark:text-gray-100">
-              Registration No:
+            <label htmlFor="regNo" className="block mb-1 font-bold dark:text-gray-100">
+              Registration Number:
             </label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              value={UserDetails?.email}
+              type="text"
+              id="regNo"
+              name="regNo"
+              value={user?.regNo}
               readOnly
               className="border rounded p-2 w-full ml-5 text-black dark:bg-gray-900 dark:text-gray-100"
             />

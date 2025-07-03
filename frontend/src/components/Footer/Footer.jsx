@@ -21,7 +21,7 @@ const Footer = () => {
                     <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
                 </li>
                 <li>
-                    <a href="https://www.linkedin.com/in/abhay-kumar-b0384b305/" target="_" className="hover:underline">Contact</a>
+                    <a href="https://www.linkedin.com/in/abhay-kumar-b0384b305/" target="_" rel="noopener noreferrer" className="hover:underline">Contact</a>
                 </li>
             </ul>
         </div>

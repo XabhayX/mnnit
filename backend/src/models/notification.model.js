@@ -3,7 +3,11 @@ import mongoose, {Schema} from 'mongoose'
 const NotificationSchema = new Schema({
     content:{
         type : String, 
-        required: true
+        required: true, 
+        trim: true
+    }, 
+    important: {
+        type: Boolean
     }
 }, 
 {timestamps: true})

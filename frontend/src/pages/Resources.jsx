@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Plus, X, UploadCloud } from 'lucide-react';
 import Card from '../components/Card/Card.jsx';
-import axios from 'axios'
 import {UserContext} from '../hooks/UserContext.js'
 import { useContext } from 'react';
+import { createDepartment, getDepartments } from '../api/resource/resource.api.js';
+import toast from 'react-hot-toast';
 
 
 function Resources() {
@@ -12,14 +13,16 @@ function Resources() {
   const [departments, setDepartments] = useState([
   ]);
 
+  const [rerender, setRerender]= useState(false)
+
   useEffect(() => {
 
-    const getDepartments = async () => {
-      const gatheredDepartments = await axios.post('/api/resources/get-departments');
+    const gettingDepartments = async () => {
+      const gatheredDepartments = await getDepartments({})
       setDepartments(gatheredDepartments.data)
     }
-    getDepartments()
-  }, [])
+    gettingDepartments()
+  }, [rerender])
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -63,10 +66,28 @@ function Resources() {
       image: defaultAvatar
     });
 
-
-    await axios.post('/api/resources/create-department', formData).then(() => { console.log("Form Data posted via Axios"); toggleModal() }).catch((err) => { "Err posting data via Axios. Err: ", err })
+    await
+    toast.promise(
+      createDepartment(formData),
+        {
+          loading: 'Creating new department...',
+          success: 'Created!',
+          error: 'Something went wrong',
+        }
+      
+    )
+    .then(() => {
+       toggleModal() ;
+       setRerender((rerender)=> !rerender)
+      })
+    .catch((err) => {
+       console.log("Err posting data via Axios. Err: ", err) 
+      })
 
   };
+
+
+
 
 
   const handleChange = (e) => {

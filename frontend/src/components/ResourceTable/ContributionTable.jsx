@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import {UserContext} from '../../hooks/UserContext.js'
 import { useState } from "react";
+import { getContribution } from "../../api/user/user.api.js";
 
 const ContributionsTable = () => {
 
@@ -12,9 +13,7 @@ const ContributionsTable = () => {
     useEffect(() => {
         console.log("gafgs")
       const contributionsFn = async ()=>{
-
-        const contributionsArray = await axios.post('/api/users/get-contribution', {regNo : user.regNo})
-        console.log(contributionsArray)
+        const contributionsArray = await getContribution({regNo : user.regNo});
         setContribution(contributionsArray.data)
       }
 
@@ -26,7 +25,7 @@ const ContributionsTable = () => {
     <div className="col-span-3 dark:bg-slate-700">
         <div data-lenis-prevent className='h-96 overflow-auto shadow-md sm:rounded-lg  dark:bg-slate-800  transition-backgroundColor duration-500 opacity-100'>
       <table className='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
-        <thead className='text-xs w text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400'>
+        <thead className='text-xs  sticky top-0 left-0 text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400'>
           <tr>
             <th scope='col' className='px-6 py-3'>Title</th>
             {/* <th scope='col' className='px-6 py-3'>Branch</th> */}

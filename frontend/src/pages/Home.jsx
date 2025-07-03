@@ -1,31 +1,44 @@
 import axios from 'axios'
 import '../utilityCSS/Home.css'
 import { useEffect } from 'react'
-import { getNotification } from '../../../backend/src/controllers/notification.controller'
 import { useState } from 'react'
+import { getNotification } from '../api/notification/notification.api.js'
 
 const Home = () => {
 
   const [notifications, setNotifications] = useState([{}])
+  const [importantNotifications, setImportantNotifications] = useState([])
 
-useEffect(() => {
-  const getNotifications = async ()=>{
-  try {
-    const notificationData = await axios.post('/api/notifications/get-notification');
-    console.log(notificationData)
-    setNotifications(notificationData.data)
-  } catch (error) {
-    console.log(error)
-  }
-  }
-  getNotifications();
-}, [])
+  useEffect(() => {
+    const getNotifications = async () => {
+      try {
+        const notificationData = await getNotification({})
+        .then((notificationData)=>{
+        
 
+        const unfiltered = notificationData.data?.filter(
+          (n) => n.important != true 
+        )
+        setNotifications(unfiltered || []);
+
+
+        const filtered = notificationData.data?.filter(
+          (n) => n.important == true
+        )
+        setImportantNotifications(filtered || []);
+
+        })
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getNotifications();
+  }, []);
 
 
   return (
         <>
-<img src="../mnnit.png" alt=""  />
+<img src="../mnnit.webp"  alt=""  />
 
 <div className='page-title sticky bg-sky-400 h-20 text-2xl flex flex-col z-20 justify-center font-bold  top-0 w-full opacity-90'><h2 style={{marginLeft: 50 }}>Home</h2></div>
 
@@ -61,8 +74,29 @@ useEffect(() => {
   </div>
 
   <div className="aboutMnnit ">
+        <div className="pb-8 w-3xl rounded-lg ">
+          {importantNotifications.length > 0 ? (
+            <ul className="space-y-3">
+              {importantNotifications.map((notification) => {
+                const date = notification.updatedAt
+                  ? notification.updatedAt.split("T")[0]
+                  : "Unknown Date";
 
-
+                return (
+                  <li
+                    key={notification._id}
+className="bg-red-100/80 dark:bg-red-400/20 p-2 pl-4 rounded-b-sm shadow-lg border border-red-400 backdrop-blur-sm ring-1 ring-red-300/40 text-black dark:text-white"
+                  >
+                    <div className="font-semibold">{notification.content}</div>
+                    <div className="text-sm text-red-700 dark:text-red-200">{date}</div>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p className="text-gray-600 dark:text-gray-300">No urgent notifications.</p>
+          )}
+        </div>
 
     <h3 className=''>ABOUT MNNIT</h3>
     <p className="first-letter:text-3xl text-xl">

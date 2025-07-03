@@ -2,8 +2,11 @@ import toast from 'react-hot-toast';
 
 const toggleDarkMode = () => {
   document.querySelector('html').classList.toggle('dark');
-
+  
   const isDark = document.querySelector('html').classList.contains('dark');
+  
+  if(isDark) localStorage.setItem('darkModeOn' , true)
+  else localStorage.removeItem('darkModeOn')
 
   const toastId = 'theme-toast';
 

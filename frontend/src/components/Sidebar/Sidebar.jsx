@@ -52,11 +52,8 @@ const Sidebar = () => {
             className='w-full text-left'
             onClick={() => {
               setUser(guestUser)
-              localStorage.removeItem('allAboutUser')
-              localStorage.removeItem('accessToken')
-              localStorage.removeItem('refreshToken')
-
-
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('hasSeenDisclaimer')
               navigate('/')
               toast.success("You've been logged out.")
               // window.location.reload()

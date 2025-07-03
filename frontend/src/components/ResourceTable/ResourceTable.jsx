@@ -1,8 +1,6 @@
-import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react';
-import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getTopicList } from '../../api/resource/resource.api';
 
 
 
@@ -17,7 +15,7 @@ const ResourceTable = () => {
     console.log(branchParam, subjectParam);
 
     const getTopics = async()=>{
-      let gatheredTopics = await axios.post('/api/resources/get-topics-list', {branchParam : branchParam, subjectParam: subjectParam})
+      let gatheredTopics = await getTopicList({branchParam : branchParam, subjectParam: subjectParam})
       // const topics = gatheredTopics.data; 
       // setTopics((topics)=>{ topics = gatheredTopics.data});
       setTopics(gatheredTopics.data)
@@ -35,7 +33,7 @@ const ResourceTable = () => {
   return (
       <div data-lenis-prevent className='h-96 my-5 overflow-auto shadow-md sm:rounded-lg'>
     <table className='w-full text-sm text-left rtl:text-right  text-gray-500 dark:text-gray-400'>
-      <thead className='text-xs text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400'>
+      <thead className='text-xs sticky top-0 left-0 text-gray-700 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400'>
         <tr>
           <th scope='col' className='px-6 py-3'>
             Topic

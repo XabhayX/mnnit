@@ -12,6 +12,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "No form data received." });
   }
 
+  
 
   if (await User.findOne({ regNo: form.regNo }) || await User.findOne({ email: form.email })) return res.status(500).json({
     message: "This user already exists",
@@ -38,22 +39,27 @@ export const registerUser = asyncHandler(async (req, res) => {
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  // console.log(email, password)
   if (!email || !password) {
     return res.status(400).json({ message: "Please provide both email and password." });
   }
 
-  const foundUser = await User.findOne({ email: email, password: password });
-
+  const foundUser = await User.findOne({ email: email });
   if (!foundUser) return res.status(404).send("User not found.")
-    
-  res.status(200).send({
-    email: foundUser.email,
-    fullName: foundUser.fullName,
-    contributions: foundUser.contributions,
-    role: foundUser.role,
-    regNo: foundUser.regNo,
-  })
 
+  if(!(await foundUser.isPasswordCorrect(password))) return res.status(401).send("email or password is wrong")
+
+ const accessToken = foundUser.generateAccessToken();
+
+    res.status(200).send({
+      email: foundUser.email,
+      fullName: foundUser.fullName,
+      contributions: foundUser.contributions,
+      role: foundUser.role,
+      regNo: foundUser.regNo,
+      accessToken
+    })
+    
 })
 
 export const getContribution = asyncHandler(async (req, res) => {

@@ -27,9 +27,12 @@ export const getTopicList = asyncHandler(async(req, res)=>{
 
 
 export const createTopics = asyncHandler(async (req, res) => {
+
+  console.log(req.body)
+
   if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
 
-  const { title, uploadedBy, regNo, subject } = req.body;
+  const { title, uploadedBy, regNo, subject, departmentId} = req.body;
 
   const cloudinaryResult = await cloudinary.uploader.upload(req.file.path, {
     folder: 'resources',
@@ -41,7 +44,7 @@ export const createTopics = asyncHandler(async (req, res) => {
     message: 'File received and uploaded to Cloudinary',
   });
 
-  const foundSubject = await Subject.findOne({ subjectID: subject });
+  const foundSubject = await Subject.findOne({ subjectID: subject , departmentId: departmentId});
   const topicUrl = cloudinaryResult.secure_url;
 
   if (foundSubject) {
@@ -63,6 +66,7 @@ export const createTopics = asyncHandler(async (req, res) => {
 
 
 export const createDepartment = asyncHandler(async(req, res)=>{
+console.log("create Deppt: ", req.body)
       await Department.create(req.body)
       res.status(200).json({ 
       message: 'Department Created',
@@ -72,5 +76,6 @@ export const createDepartment = asyncHandler(async(req, res)=>{
 export const createSubjects = asyncHandler(async(req, res)=>{
     // console.log("Subject creation query")
     await Subject.create(req.body);
+    console.log(req.body)
     res.send('Subject Details Accepted')
 })
